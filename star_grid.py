@@ -1,5 +1,6 @@
 import sys
 import pygame
+from random import randint
 
 from settings import Settings
 from stars import Star
@@ -43,7 +44,7 @@ class StarGrid():
 
     def _create_fleet_star(self):
         """Create the fleet of star"""
-        # create a star and find the number of stars in a row
+        # Create a star and find the number of stars in a row
         # The spacing between two star is equal to one star width
         star = Star(self)
         star_width =  star.rect.width
@@ -52,7 +53,7 @@ class StarGrid():
 
         # Determine the number of stars fit in the screen
         star_height = star.rect.height
-        available_space_y = self.settings.screen_height - (0 * star_height) 
+        available_space_y = self.settings.screen_height - (1 * star_height) 
         number_rows = available_space_y // (2 * star_height)
 
         # Create full fleet of star
@@ -64,10 +65,16 @@ class StarGrid():
         """Create star"""
         star = Star(self)
         star_width, star_height = star.rect.size
-        star.x = star_width + 2 * star_width * num_col
+        rand_x = randint(-10, 10)
+        rand_y = randint(-10, 10)
+        
+        # Star horizontal position
+        star.x = rand_x + 2 * star_width * num_col
         star.rect.x = star.x
+        
+        # Star vertical position
+        star.rect.y = rand_y + 2 * star_height * num_row
 
-        star.rect.y = star.rect.height + 2 * star.rect.height * num_row
         self.star.add(star)
 
 
